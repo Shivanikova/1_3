@@ -1,0 +1,54 @@
+1.
+
+Команда для построения образа:
+C:\Users\shiva\Desktop\Study\1T\docker\db>docker build -t test_image:latest .
+
+Команда для запуска контейнера на основании созданного образа:
+C:\Users\shiva\Desktop\Study\1T\docker\db>docker run --rm -d -p 5435:5432 --name test_image test_image:latest
+56de9eca064dad9a8bd9f41b7be20f220289ef2c47738b5189a43cffb6032ebc
+
+2. 
+Команда docker, позволяющая подключиться к контейнеру.
+C:\Users\shiva\Desktop\Study\1T\docker\db>docker exec -it test_image psql -U shiva test_db
+psql (15.3 (Debian 15.3-1.pgdg110+1))
+Type "help" for help.
+
+test_db=#
+
+test_db=# \l
+                                             List of databases
+   Name    | Owner | Encoding |  Collate   |   Ctype    | ICU Locale | Locale Provider | Access privileges
+-----------+-------+----------+------------+------------+------------+-----------------+-------------------
+ postgres  | shiva | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            |
+ template0 | shiva | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | =c/shiva         +
+           |       |          |            |            |            |                 | shiva=CTc/shiva
+ template1 | shiva | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            | =c/shiva         +
+           |       |          |            |            |            |                 | shiva=CTc/shiva
+ test_db   | shiva | UTF8     | en_US.utf8 | en_US.utf8 |            | libc            |
+(4 rows)
+
+
+test_db=# \dt
+          List of relations
+ Schema |    Name    | Type  | Owner
+--------+------------+-------+-------
+ public | index_mass | table | shiva
+
+(1 row)
+
+test_db=# select * from index_mass;
+ user_id | weight | height
+---------+--------+--------
+       1 |     75 |    175
+       2 |     60 |    182
+       3 |     93 |    181
+       4 |     78 |    180
+(4 rows)
+
+3. 
+Команда для запуска контейнера с реализованным механизмом хранения данных.
+C:\Users\shiva\Desktop\Study\1T\docker\db>docker run --rm -d -p 5435:5432 -v C:\Users\shiva\Desktop\Study\1T\333:/var/lib/postgresql/data --name test_image test_image:latest
+f251a83d6dadf1e282bc8e19d330a47b05c0d648885aac3c61b6671206bdb4c9 
+
+
+
