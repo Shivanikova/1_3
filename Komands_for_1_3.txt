@@ -45,6 +45,18 @@ test_db=# select * from index_mass;
        4 |     78 |    180
 (4 rows)
 
+test_db=# INSERT INTO index_mass (user_id, weight, height)
+test_db-# VALUES ('5', '65', '170');
+INSERT 0 1
+test_db=# select * from index_mass;
+ user_id | weight | height
+---------+--------+--------
+       1 |     75 |    175
+       2 |     60 |    182
+       3 |     93 |    181
+       4 |     78 |    180
+       5 |     65 |    170
+(5 rows)
 3. 
 Команда для запуска контейнера с реализованным механизмом хранения данных.
 C:\Users\shiva\Desktop\Study\1T\docker\db>docker run --rm -d -p 5435:5432 -v C:\Users\shiva\Desktop\Study\1T\333:/var/lib/postgresql/data --name test_image test_image:latest
